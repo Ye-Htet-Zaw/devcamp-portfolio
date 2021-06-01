@@ -1,7 +1,13 @@
 class ApplicationController < ActionController::Base
-	include SetSource
+	#include SetSource
 
 	include CurrentUserConcern
+
+	before_action :set_source
+
+	def set_source
+		session[:source] = params[:q] if params[:q]
+	end
 
 	before_action :set_page_defaults
 
